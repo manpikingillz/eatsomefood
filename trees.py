@@ -130,7 +130,33 @@ class BinaryTree:
                 queue.append(current_node.right)
 
         return result
-
+    
+    @classmethod
+    def from_array(cls, arr):
+        if not arr:
+            return cls()
+        
+        root = Node(arr[0])
+        tree = cls(root.value)
+        queue = [root]
+        idx = 1
+        
+        while queue and idx < len(arr):
+            current_node = queue.pop(0)
+            
+            # Assign and enqueue the left child
+            if idx < len(arr) and arr[idx] is not None:
+                current_node.left = Node(arr[idx])
+                queue.append(current_node.left)
+            idx += 1
+            
+            # Assign and enqueue the right child
+            if idx < len(arr) and arr[idx] is not None:
+                current_node.right = Node(arr[idx])
+                queue.append(current_node.right)
+            idx += 1
+        
+        return tree
 
 
 tree = BinaryTree(1)
@@ -139,7 +165,9 @@ tree.insert_right(tree.root, 3)
 tree.insert_left(tree.root.left, 4)
 tree.insert_right(tree.root.left, 5)
 
-
-
-
 print('tree: ', tree.to_array())
+
+arr = [1, 2, 3, 4, 5]
+tree1 = BinaryTree.from_array(arr)
+
+print('from array: ', tree1)
