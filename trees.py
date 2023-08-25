@@ -97,6 +97,49 @@ class BinaryTree:
     def __init__(self, root_value):
         self.root = Node(root_value)
 
-    def insert(self, node, value):
-        self.root.left = left
-        self.root.right = right
+    def insert_left(self, parent_node: Node, left_value):
+        if parent_node.left is None:
+            parent_node.left = Node(left_value)
+        else:
+            new_node = Node(left_value)
+            new_node.left = parent_node.left
+            parent_node.left = new_node
+
+    def insert_right(self, parent_node: Node, right_value):
+        if parent_node.right is None:
+            parent_node.right = Node(right_value)
+        else:
+            new_node = Node(right_value)
+            new_node.right = parent_node.right
+            parent_node.right = new_node
+
+    def to_array(self):
+        if not self.root:
+            return []
+
+        queue = [self.root]
+        result = []
+
+        while queue:
+            current_node = queue.pop(0)
+            result.append(current_node.value)
+
+            if current_node.left:
+                queue.append(current_node.left)
+            if current_node.right:
+                queue.append(current_node.right)
+
+        return result
+
+
+
+tree = BinaryTree(1)
+tree.insert_left(tree.root, 2)
+tree.insert_right(tree.root, 3)
+tree.insert_left(tree.root.left, 4)
+tree.insert_right(tree.root.left, 5)
+
+
+
+
+print('tree: ', tree.to_array())
