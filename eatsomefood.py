@@ -1,7 +1,7 @@
 import time
 import threading
-from pynput.mouse import Button, Controller
-from pynput.keyboard import Listener, KeyCode, Key
+from pynput.mouse import Button, Controller as MouseCountroller
+from pynput.keyboard import Listener, KeyCode, Key, Controller as KeyboardController
 import random
 
 mouse_delay = random.randint(5, 15)
@@ -52,14 +52,14 @@ class KeyboardInput(threading.Thread):
         self.running = False
         self.program_run = True
 
-    def start_clicking(self):
+    def start_input(self):
         self.running = True
 
-    def stop_clicking(self):
+    def stop_input(self):
         self.running = False
 
     def exit(self):
-        self.stop_clicking()
+        self.stop_input()
         self.program_run = False
 
     def run(self):
@@ -74,13 +74,13 @@ class KeyboardInput(threading.Thread):
             time.sleep(0.1)
 
 
-mouse = Controller()
+mouse = MouseCountroller()
 mouse_thread = ClickMouse(mouse_delay, button)
 mouse_thread.start()
 
-# keyboard = Controller()
-# keyboard_thread = KeyboardInput(keyboard_delay)
-# keyboard_thread.start()
+keyboard = KeyboardController()
+keyboard_thread = KeyboardInput(keyboard_delay)
+keyboard_thread.start()
 
 
 def on_press(key):
@@ -91,14 +91,14 @@ def on_press(key):
         else:
             mouse_thread.start_clicking()
 
-        # if keyboard_thread.running:
-        #     keyboard_thread.stop_clicking()
-        # else:
-        #     keyboard_thread.start_clicking()
+        if keyboard_thread.running:
+            keyboard_thread.stop_input()
+        else:
+            keyboard_thread.start_input()
 
     elif key == exit_key:
         mouse_thread.exit()
-        # keyboard_thread.exit()
+        keyboard_thread.exit()
         listener.stop()
         print('clicked_count: ', clicked_count)
         print('keyboard_count: ', keyboard_count)

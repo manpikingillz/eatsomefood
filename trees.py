@@ -122,7 +122,7 @@ class BinaryTree:
 
         while queue:
             current_node = queue.pop(0)
-            result.append(current_node.value)
+            result.append(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             .value)
 
             if current_node.left:
                 queue.append(current_node.left)
@@ -130,32 +130,31 @@ class BinaryTree:
                 queue.append(current_node.right)
 
         return result
-    
+
     @classmethod
     def from_array(cls, arr):
         if not arr:
             return cls()
-        
+
         root = Node(arr[0])
         tree = cls(root.value)
         queue = [root]
         idx = 1
-        
+
         while queue and idx < len(arr):
             current_node = queue.pop(0)
-            
+
             # Assign and enqueue the left child
             if idx < len(arr) and arr[idx] is not None:
                 current_node.left = Node(arr[idx])
                 queue.append(current_node.left)
             idx += 1
-            
             # Assign and enqueue the right child
             if idx < len(arr) and arr[idx] is not None:
                 current_node.right = Node(arr[idx])
                 queue.append(current_node.right)
             idx += 1
-        
+
         return tree
 
 
