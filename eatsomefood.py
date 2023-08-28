@@ -108,13 +108,13 @@ def on_press(key):
         mouse_thread.exit()
         keyboard_thread.exit()
         listener.stop()
-        print('clicked_count: ', clicked_count)
-        print('keyboard_count: ', keyboard_count)
-        print('exit')
+        print('M Count: ', clicked_count)
+        print('K Count: ', keyboard_count)
+        print('Exited')
 
 
 if __name__ == '__main__':
     with Listener(on_press=on_press) as listener:
-        print("strat")
+        print("Start")
         listener.join()
-        print("Gil")
+        print("End")
