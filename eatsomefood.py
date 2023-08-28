@@ -9,7 +9,7 @@ from pynput.keyboard import (
 import random
 
 mouse_delay = random.randint(5, 15)
-keyboard_delay = random.uniform(0.5, 5.5)
+keyboard_delay = random.uniform(0.05, 5)
 
 button = Button.left
 start_stop_key = KeyCode(char='s')
@@ -73,7 +73,7 @@ class KeyboardInput(threading.Thread):
                 random_key = random.choice(list(Key))
                 # keyboard.press(Key.cmd)
                 # keyboard.release(Key.cmd)
-                # Use a random key so that we're not pressing the same key all the time.
+                # Use a random key so we don't press the same key all the time.
                 keyboard.press(random_key)
                 keyboard.release(random_key)
 
