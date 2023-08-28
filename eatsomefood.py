@@ -1,11 +1,15 @@
 import time
 import threading
 from pynput.mouse import Button, Controller as MouseCountroller
-from pynput.keyboard import Listener, KeyCode, Key, Controller as KeyboardController
+from pynput.keyboard import (
+    Listener,
+    KeyCode,
+    Key,
+    Controller as KeyboardController)
 import random
 
 mouse_delay = random.randint(5, 15)
-keyboard_delay = random.randint(5, 15)
+keyboard_delay = random.uniform(0.5, 5.5)
 
 button = Button.left
 start_stop_key = KeyCode(char='s')
@@ -66,8 +70,12 @@ class KeyboardInput(threading.Thread):
         global keyboard_count
         while self.program_run:
             while self.running:
-                keyboard.press(Key.cmd)
-                keyboard.release(Key.cmd)
+                random_key = random.choice(list(Key))
+                # keyboard.press(Key.cmd)
+                # keyboard.release(Key.cmd)
+                # Use a random key so that we're not pressing the same key all the time.
+                keyboard.press(random_key)
+                keyboard.release(random_key)
 
                 keyboard_count = keyboard_count + 1
                 time.sleep(self.keyboard_delay)
