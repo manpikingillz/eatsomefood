@@ -8,8 +8,8 @@ from pynput.keyboard import (
     Controller as KeyboardController)
 import random
 
-mouse_delay = random.randint(5, 15)
-keyboard_delay = random.uniform(0.05, 5)
+mouse_delay = random.randint(3, 12)
+keyboard_delay = random.uniform(0.05, 3)
 
 button = Button.left
 start_stop_key = KeyCode(char='s')
@@ -70,12 +70,12 @@ class KeyboardInput(threading.Thread):
         global keyboard_count
         while self.program_run:
             while self.running:
-                random_key = random.choice(list(Key))
-                # keyboard.press(Key.cmd)
-                # keyboard.release(Key.cmd)
+                # random_key = random.choice(list(Key))
+                keyboard.press(Key.down)
+                keyboard.release(Key.down)
                 # Use a random key so we don't press the same key all the time.
-                keyboard.press(random_key)
-                keyboard.release(random_key)
+                # keyboard.press(random_key)
+                # keyboard.release(random_key)
 
                 keyboard_count = keyboard_count + 1
                 time.sleep(self.keyboard_delay)
